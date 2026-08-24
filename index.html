@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jeremy Panasuk · FDE Floor · Carex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --navy:#0b1220; --ink:#122033; --gold:#c4a35a; --cream:#f6f1e8; --mute:#8a93a0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--navy); color: var(--cream); font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+    body { overflow: hidden; }
+    button { font-family: inherit; cursor: pointer; }
+    #boot {
+      position: fixed; inset: 0; z-index: 40; background: #05080f;
+      display: flex; flex-direction: column; justify-content: center; padding: 8vh 8vw;
+    }
+    #boot.hide { animation: out .6s ease forwards; pointer-events: none; }
+    @keyframes out { to { opacity: 0; transform: scale(.98); } }
+    #boot .k { font-family: "IBM Plex Mono", monospace; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-size: 11px; }
+    #boot h1 { font-size: clamp(40px, 8vw, 84px); line-height: .88; letter-spacing: -.04em; margin: 16px 0 18px; font-weight: 800; }
+    #boot h1 em { color: var(--gold); font-style: italic; }
+    #boot p { max-width: 46ch; color: #d5cbb8; line-height: 1.45; margin-bottom: 28px; }
+    #boot .go { background: var(--gold); color: var(--ink); border: 0; padding: 14px 22px; letter-spacing: .14em; text-transform: uppercase; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; }
+    .shell { height: 100%; display: grid; grid-template-columns: 220px 1fr 340px; }
+    @media (max-width: 980px) { .shell { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; } body { overflow: auto; } }
+    aside, .stage, .rail { min-height: 0; }
+    aside {
+      border-right: 1px solid #243044; padding: 18px 14px; display: flex; flex-direction: column; gap: 8px;
+      background: linear-gradient(180deg, #0e1624, #0b1220);
+    }
+    aside img { width: 72px; height: 90px; object-fit: cover; object-position: 50% 12%; border: 2px solid var(--gold); }
+    aside .k { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+    aside h2 { font-size: 18px; line-height: 1.05; margin: 6px 0 4px; }
+    aside .meta { font-size: 11px; color: var(--mute); line-height: 1.4; margin-bottom: 10px; }
+    .navb { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+    .navb button {
+      text-align: left; background: transparent; color: #c9d3df; border: 1px solid #2a3a50;
+      padding: 9px 10px; font-size: 12px;
+    }
+    .navb button.on { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 700; }
+    .navb button small { display: block; font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; opacity: .75; }
+    .links { margin-top: auto; display: flex; flex-direction: column; gap: 6px; padding-top: 12px; }
+    .links a { color: var(--gold); font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; }
+    .stage { position: relative; padding: 28px 32px; overflow: auto; }
+    .hud { display: flex; justify-content: space-between; gap: 12px; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .panel { display: none; animation: in .35s ease; }
+    .panel.on { display: block; }
+    @keyframes in { from { opacity: 0; transform: translateY(8px); } }
+    .panel h1 { font-size: clamp(28px, 4vw, 48px); line-height: .92; letter-spacing: -.03em; margin-bottom: 10px; }
+    .panel h1 em { color: var(--gold); font-style: italic; }
+    .lede { color: #d5cbb8; max-width: 62ch; line-height: 1.45; margin-bottom: 18px; }
+    .spine { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin: 12px 0 18px; }
+    .spine div { background: #1a2536; padding: 10px 8px; text-align: center; font-size: 11px; }
+    .spine div b { display: block; color: var(--gold); font-family: "IBM Plex Mono", monospace; font-size: 13px; margin-bottom: 2px; }
+    .spine div.live { background: var(--gold); color: var(--ink); }
+    .spine div.live b { color: var(--ink); }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .card { background: #121b2b; border: 1px solid #2a3a50; padding: 14px; }
+    .card h3 { font-size: 15px; margin-bottom: 6px; }
+    .card p { font-size: 13px; color: #c9d3df; line-height: 1.4; }
+    .bar { height: 10px; background: #1c2738; margin: 8px 0; }
+    .bar > i { display: block; height: 10px; background: var(--gold); }
+    .week { display: flex; align-items: center; gap: 12px; margin: 16px 0; }
+    .week input { flex: 1; accent-color: var(--gold); }
+    .agents { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
+    .ag { background: #121b2b; border: 1px solid #2a3a50; padding: 12px; min-height: 140px; transition: .25s; }
+    .ag.on { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+    .ag b { display: block; color: var(--gold); font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+    pre { background: #070b12; color: #c4a35a; padding: 12px; font-size: 11px; overflow: auto; border: 1px solid #2a3a50; font-family: "IBM Plex Mono", monospace; line-height: 1.4; }
+    .run { background: var(--gold); color: var(--ink); border: 0; padding: 10px 16px; font-family: "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; font-size: 11px; font-weight: 600; }
+    .rail {
+      border-left: 1px solid #243044; padding: 16px 14px; overflow: auto;
+      background: #0c141f;
+    }
+    .rail h3 { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .req { display: block; width: 100%; text-align: left; background: transparent; border: 0; border-bottom: 1px solid #243044; color: #c9d3df; padding: 8px 4px; font-size: 12px; }
+    .req.on { color: var(--gold); }
+    .req:hover { background: #162033; }
+    .log { margin-top: 16px; font-family: "IBM Plex Mono", monospace; font-size: 11px; color: #9fb0c4; line-height: 1.5; }
+    .log b { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <div id="boot">
+    <div class="k">Carex · Forward Deployed Engineer · Madison hybrid 3 days</div>
+    <h1>If they cannot run it Tuesday,<br><em>I did not finish.</em></h1>
+    <p>Not a letter-page packet. A floor. Click a line of the posting — the matching receipt lights. Step a two-week POC. Run the four-agent contract on local Ollama. Jeremy Panasuk. Sand Creek, WI.</p>
+    <button class="go" id="enter">Enter the floor</button>
+  </div>
+
+  <div class="shell">
+    <aside>
+      <img src="assets/portrait.jpg" alt="Jeremy Panasuk" />
+      <div class="k">FDE · Carex</div>
+      <h2>Jeremy Panasuk</h2>
+      <p class="meta">Sand Creek, WI · Madison 3 days<br>715-970-0204 · jpanasuk@gmail.com</p>
+      <div class="navb">
+        <button class="on" data-go="floor"><small>01</small>The floor</button>
+        <button data-go="posting"><small>02</small>This posting</button>
+        <button data-go="poc"><small>03</small>POC · SOW superstar</button>
+        <button data-go="agents"><small>04</small>Four-agent runtime</button>
+        <button data-go="line"><small>05</small>The clip</button>
+      </div>
+      <div class="links">
+        <a href="JEREMY_PANASUK_CAREX_FDE_ROLE.pdf">Open the clickable PDF</a>
+        <a href="playbook.html">Letter playbook</a>
+        <a href="https://github.com/jpanasuk-netizen/for-carex-fde-role">GitHub</a>
+        <a href="https://huggingface.co/spaces/jpanasuk/for-carex-fde-role">Hugging Face</a>
+      </div>
+    </aside>
+
+    <main class="stage">
+      <div class="hud"><span id="hud-mode">01 · THE FLOOR</span><span>GROWING FDE FUNCTION · NOT A DEMO</span></div>
+
+      <section class="panel on" id="floor">
+        <h1>Hear. Wrangle. Ship.<em> Measure. They run it.</em></h1>
+        <p class="lede">The same five steps on every floor. Dawn’s warehouse. Volkswagen’s RAC. An unnamed metal box sales would not touch. Click a posting line in the right rail — the receipt that proves it takes the gold.</p>
+        <div class="spine" id="spine">
+          <div class="live" data-s="0"><b>01</b>Hear the floor</div>
+          <div data-s="1"><b>02</b>Wrangle what exists</div>
+          <div data-s="2"><b>03</b>Ship + leave a path</div>
+          <div data-s="3"><b>04</b>Measure after</div>
+          <div data-s="4"><b>05</b>They run Tuesday</div>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <h3>Night operator</h3>
+            <p>Unofficial definition. Workaround from 2011. If ops cannot run the agent without you, you installed software. You did not finish.</p>
+          </div>
+          <div class="card">
+            <h3>19 recovered of 20</h3>
+            <p>Parachute closer. Milwaukee: three-month outage, two days, one buried DB2 driver. Support is the job after the demo.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="posting">
+        <h1>What you’ll do.<em> Already the work.</em></h1>
+        <p class="lede">Growing Forward Deployed Engineering function. Formal SWE not required. Epic Agent Factory preferred — not claimed. I take it like Grid/HA: embed, measure, write the standard.</p>
+        <div class="cards">
+          <div class="card"><h3>Schemas · workflows · agent skills</h3><p>Ameriprise 200+ critical data elements on IDQ / EDC / Axon. Dawn Type 2. NFCU naming standards. Pydantic contracts on the four-agent runtime — same idea.</p></div>
+          <div class="card"><h3>Prototypes · lightweight apps</h3><p>Local Grid Suite CLI + PDF. Two-week POCs on customer metal. Dockroot-MCP so the agent sees the boundary, not host-root.</p></div>
+          <div class="card"><h3>Product enhancements from the field</h3><p>JPM CoE roadmaps. If three customers hit the same wall, it is the next feature. Final two. Did not close.</p></div>
+          <div class="card"><h3>Accounting-adjacent floors</h3><p>Prime Medicare + MTM. MOBE 99.99%. Mercedes-Benz Financial. BNY Mellon. Related field — not a CPA seat.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="poc">
+        <h1>POC · SOW superstar.<em> Two weeks. Deal after.</em></h1>
+        <p class="lede">Sales does not install PowerCenter and Data Quality on their metal. Unless quota. Drag the week. Watch the close.</p>
+        <div class="week">
+          <span class="k" style="font-family:IBM Plex Mono,monospace;color:var(--gold);font-size:12px;">DAY <b id="day">1</b></span>
+          <input id="scrub" type="range" min="1" max="14" value="1" />
+          <span id="beat" style="font-size:13px;color:#d5cbb8;min-width:28ch;">On their floor.</span>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <h3>Volkswagen Group of America</h3>
+            <p>Complete Grid/HA: bonded dual NIC, Oracle RAC on InfiniBand, three 8-core PowerCenter servers. Live demo a day early. Four consultants shadowed. Parallel DQ burning next door — pressure, not my miss. No dollar on this copy.</p>
+            <div class="bar"><i id="vwbar" style="width:8%"></i></div>
+          </div>
+          <div class="card">
+            <h3>Unnamed · PC + DQ on their systems</h3>
+            <p>Official path: VM lab. They would not buy from a VM. Smoke + use cases against their data. Flying colors. Deal closed immediately. A rep cleared the quarter because the POC existed.</p>
+            <div class="bar"><i id="pcbar" style="width:8%"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="agents">
+        <h1>Four isolated processes.<em> One contract.</em></h1>
+        <p class="lede">Local Ollama on an RTX 4070 / WSL2. Each agent is its own Python venv. A crash in one does not take the others down. JSON handoff — not free text. This run is a walkthrough of the architecture, not a live model call.</p>
+        <button class="run" id="fire">Run the contract</button>
+        <div class="agents" id="ags">
+          <div class="ag" data-i="0"><b>01 Systems</b>Constraints. Interfaces. What must not break.</div>
+          <div class="ag" data-i="1"><b>02 Architect</b>Pydantic models. Structured JSON the next agent can consume.</div>
+          <div class="ag" data-i="2"><b>03 Synthesis</b>Payload against local Ollama. The work happens on their metal.</div>
+          <div class="ag" data-i="3"><b>04 Validator</b>Schema + graph checks. Write, execute, debug until pass.</div>
+        </div>
+        <pre id="json">{ "status": "idle", "handoff": null }</pre>
+      </section>
+
+      <section class="panel" id="line">
+        <h1>Customer satisfaction is worthless.<em> Customer loyalty is priceless.</em></h1>
+        <p class="lede">Talk given at Informatica while still on Dawn’s floor. BofA lost a lifetime over two policy clicks. Dawn 8h→1h got used. John’s daughters. Trillium did not even take a proposal. Full stories are pages 3–5 of the PDF — two complete examples per page. Nothing cuts off.</p>
+        <div class="cards">
+          <div class="card"><h3>Satisfaction</h3><p>A demo they clap for. CSAT they forget. “We shipped.”</p></div>
+          <div class="card"><h3>Loyalty</h3><p>Tuesday. Named skill-up. Playbook TCS kept. Throughput they renew.</p></div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="rail">
+      <h3>This posting · click a line</h3>
+      <button class="req on" data-note="Partner with customers until the unofficial definition is named. Dawn. NFCU. West Bend.">Partner with customers</button>
+      <button class="req" data-note="Configure first. Build when configure is a lie. Hypercare. 19/20.">Design · configure · build · deploy</button>
+      <button class="req" data-note="Ameriprise 200+ CDEs. Dawn Type 2. NFCU naming standards. Pydantic on the runtime.">Workflows · schemas · agent skills</button>
+      <button class="req" data-note="Local Grid Suite CLI+PDF. Two-week metal POCs. Dockroot-MCP.">Prototypes · lightweight apps</button>
+      <button class="req" data-note="JPM CoE. Field notes weekly. If three customers hit the wall, it is the next feature.">Product enhancements from the field</button>
+      <button class="req" data-note="Metric on the cover of every Environment Summary. Dawn 8h→1h. Lab 27×.">Define success · measure after</button>
+      <button class="req" data-note="Milwaukee: three-month outage, two days, one DB2 driver. Fire department after the demo.">Monitor · troubleshoot · improve</button>
+      <button class="req" data-note="TCS kept Mercedes. Farmers named the skill-up. QA twin of production.">Reusable kits · best practices</button>
+      <button class="req" data-note="I already write Environment Summaries and six-class tests like the next FDE is watching.">Establish playbooks for a growing function</button>
+      <button class="req" data-note="Four-agent runtime on local Ollama. Isolated venvs. Self-heal until the contract passes.">AI agents in day-to-day work</button>
+      <button class="req" data-note="Prime Medicare/MTM. MOBE. MBFS. BNY. Related field — not a CPA seat.">Accounting technology · related</button>
+      <button class="req" data-note="Preferred, not claimed. HIMSS 2026 preview. I take it like Grid/HA.">Epic Agent Factory</button>
+      <button class="req" data-note="Sand Creek, WI. Hybrid 3 days as posted. The customer is why.">Madison 3 days onsite</button>
+      <div class="log" id="log"><b>READY</b><br>Click a posting line. The floor answers.</div>
+    </aside>
+  </div>
+
+  <script>
+    const boot = document.getElementById('boot');
+    document.getElementById('enter').onclick = () => boot.classList.add('hide');
+    setTimeout(() => { if (!boot.classList.contains('hide')) boot.classList.add('hide'); }, 12000);
+
+    const panels = [...document.querySelectorAll('.panel')];
+    const nav = [...document.querySelectorAll('.navb button')];
+    const hud = document.getElementById('hud-mode');
+    const labels = { floor:'01 · THE FLOOR', posting:'02 · THIS POSTING', poc:'03 · POC · SOW SUPERSTAR', agents:'04 · FOUR-AGENT RUNTIME', line:'05 · THE CLIP' };
+    function go(id) {
+      panels.forEach(p => p.classList.toggle('on', p.id === id));
+      nav.forEach(b => b.classList.toggle('on', b.dataset.go === id));
+      hud.textContent = labels[id];
+    }
+    nav.forEach(b => b.onclick = () => go(b.dataset.go));
+
+    const spine = [...document.querySelectorAll('#spine div')];
+    let s = 0;
+    setInterval(() => {
+      s = (s + 1) % 5;
+      spine.forEach((el, i) => el.classList.toggle('live', i === s));
+    }, 2200);
+
+    const beats = [
+      '', 'On their floor.', 'Bond the NICs.', 'RAC on InfiniBand.', 'Three 8-core PC nodes.',
+      'Install PC / DQ on metal — not the VM.', 'Smoke the stack.', 'Use cases against their data.',
+      'Consultants shadowing, taking notes.', 'Flying colors.', 'Live demo.',
+      'Day early at VW.', 'SOW language: resource levels, assumptions.', 'Deal closes. Quota clears.', 'They can run Tuesday.'
+    ];
+    const scrub = document.getElementById('scrub');
+    function paintWeek() {
+      const d = +scrub.value;
+      document.getElementById('day').textContent = d;
+      document.getElementById('beat').textContent = beats[d];
+      document.getElementById('vwbar').style.width = Math.min(100, d * 8) + '%';
+      document.getElementById('pcbar').style.width = Math.min(100, Math.max(8, (d - 3) * 10)) + '%';
+    }
+    scrub.oninput = paintWeek;
+
+    const frames = [
+      { i:0, json: '{ "agent": "systems", "constraint": "customer_metal", "must_not_break": ["prod", "BAA"] }' },
+      { i:1, json: '{ "agent": "architect", "contract": "Handoff.v1", "schema": "pydantic" }' },
+      { i:2, json: '{ "agent": "synthesis", "runtime": "ollama.local", "gpu": "4070" }' },
+      { i:3, json: '{ "agent": "validator", "status": "pass", "retries": 2, "tuesday": true }' }
+    ];
+    document.getElementById('fire').onclick = () => {
+      const ags = [...document.querySelectorAll('#ags .ag')];
+      const box = document.getElementById('json');
+      ags.forEach(a => a.classList.remove('on'));
+      let n = 0;
+      const tick = () => {
+        if (n) ags[n-1].classList.remove('on');
+        ags[n].classList.add('on');
+        box.textContent = frames[n].json;
+        n += 1;
+        if (n < 4) setTimeout(tick, 700);
+      };
+      tick();
+    };
+
+    const log = document.getElementById('log');
+    document.querySelectorAll('.req').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.req').forEach(x => x.classList.remove('on'));
+        btn.classList.add('on');
+        log.innerHTML = '<b>RECEIPT</b><br>' + btn.dataset.note;
+        if (btn.textContent.includes('POC') || btn.textContent.includes('Prototype')) go('poc');
+        if (btn.textContent.includes('AI agents')) go('agents');
+        if (btn.textContent.includes('Epic')) go('posting');
+      };
+    });
+  </script>
+</body>
+</html>
