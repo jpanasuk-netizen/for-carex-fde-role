@@ -11,6 +11,17 @@
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     html, body { background: #fff; }
     .sheet { width: 8.5in; height: 11in; overflow: hidden; page-break-after: always; position: relative; background: #f6f1e8; color: #122033; font-family: "Plus Jakarta Sans", Arial, sans-serif; }
+    @media screen {
+      html, body { background: #e8dfcc; min-height: 0; }
+      body { padding: 24px 12px 72px; }
+      .sheet {
+        width: min(8.5in, 100%);
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+        margin: 0 auto 24px;
+      }
+    }
     .navy { height: 6px; background: #122033; }
     .gold { height: 3px; background: #c4a35a; }
     .pad { padding: 0.12in 0.28in 0.24in; }

@@ -1,15 +1,15 @@
 ---
-title: Carex FDE Floor
+title: Carex FDE
 emoji: 📡
 colorFrom: yellow
 colorTo: blue
 sdk: static
 pinned: false
-short_description: FDE floor app — POC to SOW, four-agent Ollama runtime.
+short_description: Long-scroll Carex FDE packet. One page, working links.
 ---
 
-# If they cannot run it Tuesday, I did not finish.
+# Customer satisfaction is worthless. Customer loyalty is priceless.
 
-Interactive Forward Deployed Engineer floor for Carex. Not a letter-page packet.
+Jeremy Panasuk · Forward Deployed Engineer · Carex. Long page with hash links, playbook, resume.
 
-[Open the PDF](./JEREMY_PANASUK_CAREX_FDE_ROLE.pdf) · [GitHub](https://jpanasuk-netizen.github.io/for-carex-fde-role/)
+[Playbook](./playbook.html) · [Resume](./resume.html) · [GitHub Pages](https://jpanasuk-netizen.github.io/for-carex-fde-role/)

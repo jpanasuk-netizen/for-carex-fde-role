@@ -1,10 +1,10 @@
 # Jeremy Panasuk · Forward Deployed Engineer · Carex
 
-Interactive floor app (not a letter-page site): click a posting line, step a two-week POC, run the four-agent contract.
+Long-scroll packet. One page, real links. Not a floor app.
 
-- App: `index.html`
-- Clickable PDF: `JEREMY_PANASUK_CAREX_FDE_ROLE.pdf`
-- Letter playbook: `playbook.html`
+- Home: `index.html` (one scroll, `#embed` `#job` `#pocs` `#agents` `#clip` `#kohls`)
+- Playbook: `playbook.html` (hash nav)
+- Resume: `resume.html`
 
 Live: https://jpanasuk-netizen.github.io/for-carex-fde-role/
 
