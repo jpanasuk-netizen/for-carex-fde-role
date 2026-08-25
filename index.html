@@ -51,8 +51,8 @@
     .spine div.go b { color: var(--n); }
     .bar { height: 8px; background: #1c2738; margin-top: 10px; }
     .bar i { display: block; height: 8px; background: var(--g); width: 12%; transition: width .35s; }
-    .week { display: flex; align-items: center; gap: 12px; margin: 8px 0 16px; }
-    .week input { flex: 1; accent-color: var(--g); }
+    .week { display: flex; align-items: center; gap: 12px; margin: 8px 0 10px; }
+    .week .go[disabled] { opacity: .35; cursor: default; }
     .ags { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0; }
     @media (max-width: 640px) { .ags, .spine { grid-template-columns: 1fr 1fr; } }
     .ag { padding: 12px; border: 1px solid rgba(196,163,90,.2); background: #141c28; min-height: 150px; font-size: 13.5px; line-height: 1.45; color: #c9d2dc; transition: .25s; }
@@ -104,7 +104,7 @@
       <section class="scene on" id="floor">
         <p class="lede">Every engagement I have run uses the same five steps. Hear what the operators actually do — including the unofficial definition of a “good run” and the night workaround somebody invented in 2011. Wrangle what already exists instead of waiting for a clean ontology. Ship something they can operate. Measure the number you named before you started. Leave them running it on Tuesday without you in the chair. That is Forward Deployed Engineering. That is also how I ran Informatica IPS embeds.</p>
         <div class="spine" id="spine">
-          <div class="go"><b>01</b>Hear the floor</div>
+          <div><b>01</b>Hear the floor</div>
           <div><b>02</b>Wrangle what exists</div>
           <div><b>03</b>Ship + leave a path</div>
           <div><b>04</b>Measure after</div>
@@ -153,12 +153,13 @@
       </section>
 
       <section class="scene" id="poc">
-        <p class="lede">A proof of concept is supposed to be a demo in a lab virtual machine. Customers often will not buy from a lab. They buy what they just watched run on their own servers. Drag the slider. The gold bars fill as the two weeks run. Both of these closed immediately after — that is how a statement of work gets signed, not a slide deck.</p>
+        <p class="lede">A proof of concept is supposed to be a demo in a lab virtual machine. Customers often will not buy from a lab. They buy what they just watched run on their own servers. Use Back and Forward to walk the two weeks. The gold bars fill as the days run. Both of these closed immediately after — that is how a statement of work gets signed, not a slide deck.</p>
         <div class="week">
-          <span class="k">Day <span id="day">1</span></span>
-          <input id="scrub" type="range" min="1" max="14" value="1" />
-          <span id="beat" style="color:#d8d0c2;font-size:14px;">I show up on their floor. Not a Zoom into a vendor VM.</span>
+          <button class="go" type="button" id="pocBack">Back</button>
+          <span class="k">Day <span id="day">1</span> of 14</span>
+          <button class="go" type="button" id="pocNext">Forward</button>
         </div>
+        <p id="beat" style="color:#d8d0c2;font-size:15px;line-height:1.5;margin:0 0 16px;max-width:62ch;">I show up on their floor. Not a Zoom into a vendor VM.</p>
         <div class="row">
           <div class="tile">
             <h3>Volkswagen Group of America — complete Grid/HA in two weeks</h3>
@@ -232,10 +233,6 @@
       show(b.dataset.s);
     });
 
-    const spine = [...document.querySelectorAll('#spine div')];
-    let i = 0;
-    setInterval(() => { i = (i + 1) % 5; spine.forEach((el, n) => el.classList.toggle('go', n === i)); }, 1800);
-
     const beats = [
       '',
       'I show up on their floor. Not a Zoom into a vendor VM.',
@@ -253,14 +250,18 @@
       'Deal closes immediately after. A sales rep clears the quarter because the POC existed.',
       'Tuesday: their team can still run it. That is finished.'
     ];
-    const scrub = document.getElementById('scrub');
-    scrub.oninput = () => {
-      const d = +scrub.value;
-      document.getElementById('day').textContent = d;
-      document.getElementById('beat').textContent = beats[d];
-      document.getElementById('vw').style.width = Math.min(100, d * 8) + '%';
-      document.getElementById('pc').style.width = Math.min(100, Math.max(8, (d - 2) * 9)) + '%';
-    };
+    let day = 1;
+    function paintPoc() {
+      document.getElementById('day').textContent = String(day);
+      document.getElementById('beat').textContent = beats[day];
+      document.getElementById('vw').style.width = Math.min(100, day * 8) + '%';
+      document.getElementById('pc').style.width = Math.min(100, Math.max(8, (day - 2) * 9)) + '%';
+      document.getElementById('pocBack').disabled = day <= 1;
+      document.getElementById('pocNext').disabled = day >= 14;
+    }
+    document.getElementById('pocBack').onclick = () => { if (day > 1) { day -= 1; paintPoc(); } };
+    document.getElementById('pocNext').onclick = () => { if (day < 14) { day += 1; paintPoc(); } };
+    paintPoc();
 
     const frames = [
       '{ "agent": "systems", "constraint": "customer_metal", "must_not_break": ["production", "boundary"] }',
