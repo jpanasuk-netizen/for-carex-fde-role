@@ -24,11 +24,11 @@
     .top a { text-decoration: none; }
     .wrap { display: grid; grid-template-columns: 1.15fr .85fr; min-height: calc(100vh - 58px); }
     @media (max-width: 900px) { .wrap { grid-template-columns: 1fr; } .photo { min-height: 42vh; } }
-    .stage { padding: 36px 40px 28px; display: flex; flex-direction: column; }
+    .stage { padding: 36px 40px 28px; display: flex; flex-direction: column; overflow: auto; }
     .k { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--g); }
     h1 { font-family: Fraunces, Georgia, serif; font-size: clamp(34px, 5vw, 62px); line-height: .92; font-weight: 600; margin: 12px 0 16px; letter-spacing: -.03em; }
     h1 i { font-style: italic; color: var(--g); }
-    .lede { max-width: 46ch; color: #d8d0c2; line-height: 1.5; font-size: 16px; margin-bottom: 22px; }
+    .lede { max-width: 62ch; color: #d8d0c2; line-height: 1.55; font-size: 16px; margin-bottom: 18px; }
     .dock { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 22px; }
     .dock button {
       background: transparent; color: var(--c); border: 1px solid rgba(196,163,90,.35);
@@ -41,8 +41,9 @@
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     @media (max-width: 640px) { .row { grid-template-columns: 1fr; } .stage { padding: 22px 18px; } }
     .tile { background: rgba(18,26,38,.72); border: 1px solid rgba(196,163,90,.18); padding: 16px 16px 14px; }
-    .tile h3 { font-size: 15px; margin-bottom: 6px; }
-    .tile p { font-size: 13.5px; line-height: 1.42; color: #c9d2dc; }
+    .tile h3 { font-size: 16px; margin-bottom: 8px; }
+    .tile p { font-size: 14.5px; line-height: 1.5; color: #c9d2dc; }
+    .tile p + p { margin-top: 8px; }
     .spine { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin: 0 0 16px; }
     .spine div { background: #1a2433; padding: 10px 6px; text-align: center; font-size: 11px; }
     .spine b { display: block; color: var(--g); font-family: "IBM Plex Mono", monospace; margin-bottom: 2px; }
@@ -54,7 +55,7 @@
     .week input { flex: 1; accent-color: var(--g); }
     .ags { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0; }
     @media (max-width: 640px) { .ags, .spine { grid-template-columns: 1fr 1fr; } }
-    .ag { padding: 12px; border: 1px solid rgba(196,163,90,.2); background: #141c28; min-height: 118px; font-size: 13px; color: #c9d2dc; transition: .25s; }
+    .ag { padding: 12px; border: 1px solid rgba(196,163,90,.2); background: #141c28; min-height: 150px; font-size: 13.5px; line-height: 1.45; color: #c9d2dc; transition: .25s; }
     .ag.on { border-color: var(--g); background: #1c2736; }
     .ag b { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--g); margin-bottom: 6px; }
     pre { background: #070b12; color: var(--g); padding: 12px; font-size: 11px; font-family: "IBM Plex Mono", monospace; border: 1px solid rgba(196,163,90,.2); overflow: auto; }
@@ -86,9 +87,10 @@
 
   <div class="wrap">
     <div class="stage">
-      <div class="k">A path the next FDE can follow</div>
+      <div class="k">Jeremy Panasuk · application for Carex Forward Deployed Engineer</div>
       <h1>If they cannot run it Tuesday,<br><i>I did not finish.</i></h1>
-      <p class="lede">Jeremy Panasuk for Carex. Growing FDE function — playbooks, standards, operating processes. Not a founding-first seat. Formal SWE not required. Epic Agent Factory preferred, not claimed.</p>
+      <p class="lede">This is not a slogan. It is how I close work. Carex is hiring a Forward Deployed Engineer — Madison, three days a week onsite — to sit with customers, turn messy process into something that actually runs, and help write the playbooks for a growing FDE function. I am not applying as “the first hire who invents the job from nothing.” I am applying as the person who has already done this motion for twenty years at Informatica Professional Services: embed, measure, leave a path the next person can run without me on Slack.</p>
+      <p class="lede">You asked for communication, ownership, AI agents in daily work, judgment about when to configure versus build, and honesty on Epic Agent Factory. Factory is preferred. I have not shipped an agent inside Epic Chronicles. I will take it the way I took Grid/HA: on the customer’s floor, with a number before and after. Formal software engineering is not required on this posting. Delivery is. That is this résumé.</p>
 
       <div class="dock">
         <button class="on" data-s="floor">The floor</button>
@@ -100,70 +102,104 @@
       </div>
 
       <section class="scene on" id="floor">
+        <p class="lede">Every engagement I have run uses the same five steps. Hear what the operators actually do — including the unofficial definition of a “good run” and the night workaround somebody invented in 2011. Wrangle what already exists instead of waiting for a clean ontology. Ship something they can operate. Measure the number you named before you started. Leave them running it on Tuesday without you in the chair. That is Forward Deployed Engineering. That is also how I ran Informatica IPS embeds.</p>
         <div class="spine" id="spine">
-          <div class="go"><b>01</b>Hear</div>
-          <div><b>02</b>Wrangle</div>
-          <div><b>03</b>Ship</div>
-          <div><b>04</b>Measure</div>
-          <div><b>05</b>They run it</div>
+          <div class="go"><b>01</b>Hear the floor</div>
+          <div><b>02</b>Wrangle what exists</div>
+          <div><b>03</b>Ship + leave a path</div>
+          <div><b>04</b>Measure after</div>
+          <div><b>05</b>They run Tuesday</div>
         </div>
         <div class="row">
-          <div class="tile"><h3>Night operator</h3><p>Unofficial definition. Workaround from 2011. If ops cannot run the agent without you, you installed software.</p></div>
-          <div class="tile"><h3>19 of 20 recovered</h3><p>Parachute closer. Milwaukee: three-month outage, two days, one buried DB2 driver. Support is the job after the demo.</p></div>
+          <div class="tile">
+            <h3>The night operator is the customer</h3>
+            <p>A workflow that “works in UAT” is customer satisfaction. The night operator still using it in month three is customer loyalty. If the customer’s ops team cannot run the agent — or the load, or the quote path — without me on the phone, I installed software. I did not finish the job this posting describes: deploy, support, and leave a reusable path.</p>
+          </div>
+          <div class="tile">
+            <h3>19 of 20 troubled accounts recovered</h3>
+            <p>At Informatica I was the person they parachuted into accounts that were already on fire. Twenty troubled engagements. Nineteen recovered. One example: a Milwaukee insurer had a three-month production pile-up. We closed it in two days. The cause was one IBM DB2 driver setting buried in IBM documentation. Monitor, troubleshoot, improve reliability — you listed that as the job after go-live. That is the fire department. I still do it.</p>
+          </div>
         </div>
       </section>
 
       <section class="scene" id="post">
+        <p class="lede">Your posting is specific. Here is what each ask maps to in work I have already done — not a keyword list.</p>
         <div class="row">
-          <div class="tile"><h3>Schemas · workflows · agent skills</h3><p>Ameriprise 200+ critical data elements on IDQ / EDC / Axon. Dawn Type 2. NFCU naming standards. Same idea as Pydantic on the four-agent runtime.</p></div>
-          <div class="tile"><h3>Prototypes · lightweight apps</h3><p>Local Grid Suite CLI + PDF, 1.39 → 37.47 tok/s. Two-week POCs on customer metal. Dockroot-MCP: the agent sees the boundary, not host-root.</p></div>
-          <div class="tile"><h3>Field back to product</h3><p>JPM CoE roadmaps. If three customers hit the same wall, it is the next feature. Final two proposals. Did not close.</p></div>
-          <div class="tile"><h3>Accounting-adjacent floors</h3><p>Prime Medicare + MTM. MOBE 99.99%. Mercedes-Benz Financial. BNY Mellon. Related field — not a CPA seat.</p></div>
-          <div class="tile"><h3>Playbooks for a growing function</h3><p>Environment Summary. Six-class tests. Named skill-up. TCS kept Mercedes. I write like the next FDE is watching.</p></div>
-          <div class="tile"><h3>Epic Agent Factory</h3><p>Preferred, not claimed. HIMSS 2026 preview. I take it like Grid/HA: embed, measure, write the standard.</p></div>
+          <div class="tile">
+            <h3>Workflows, agent skills, and document schemas</h3>
+            <p>You asked me to develop and customize workflows, agent capabilities, and document schemas. At Ameriprise I connected core systems to Informatica Data Quality, Enterprise Data Catalog, and Axon and held data-quality rules across more than 200 critical data elements, 24×7. At Dawn Foods I mentored Type 2 warehouse design — slowly changing dimensions, not a one-off mapping. At Navy Federal I wrote naming standards and service configuration so their team could operate the platform after I left. A schema is a contract. That is the same idea as Pydantic JSON between agents in the lab.</p>
+          </div>
+          <div class="tile">
+            <h3>Prototypes, automations, lightweight applications</h3>
+            <p>You asked for modern agentic tools used to create integrations, prototypes, automations, and lightweight apps. Local Grid Suite is a CLI plus a PDF report that benches decode on my RTX 4070: 1.39 tokens/sec on CPU baseline to 37.47 after GPU routing. I measure before I claim. Two-week proofs of concept on the customer’s own machines — not a vendor VM they will never buy from. Dockroot-MCP lets an agent see Docker and the network without becoming host-root. That is how you put an agent next to a bank or a clinic without becoming the incident.</p>
+          </div>
+          <div class="tile">
+            <h3>Targeted product enhancements from the field</h3>
+            <p>You asked for actionable feedback to product and engineering. At JPMorgan Chase I worked sales, regional managers, and IPS VPs on enterprise data-warehouse and Center of Excellence roadmaps — field notes back into product. If three customers hit the same wall, it is the next feature, not another hero week. We reached the final two proposals. We did not close. I will not write that as a $10 million win.</p>
+          </div>
+          <div class="tile">
+            <h3>Accounting technology — related, not claimed as a CPA seat</h3>
+            <p>The posting lists accounting technology as a related field. I have sat financial and benefits operations floors, not as a CPA. Prime Therapeutics: Medicare and Medication Therapy Management data marts. MOBE: Talend 8 on a live platform, Redshift and SQL Server, 99.99% stability, on-call RCA the next morning. Mercedes-Benz Financial: ALFA to ODS at 100% CPU until cache lived in RAM. Bank of New York Mellon: Grid/HA with senior VPs and Informatica CEO Sohaib Abbasi in the room.</p>
+          </div>
+          <div class="tile">
+            <h3>Playbooks, standards, operating processes</h3>
+            <p>You are growing a Forward Deployed Engineering function. You need playbooks the second hire can run. I already write that way. Every Informatica IPS engagement opened with an Environment Summary — owner and date on the cover, utilization first, what was already changed. Close included a named skill-up and, where it mattered, a QA twin of production. TCS kept the Mercedes performance-tuning path. Farmers named Developer tool and Advanced XML in the write-up. That is “help establish the playbooks,” not a slide about culture.</p>
+          </div>
+          <div class="tile">
+            <h3>Epic Agent Factory — preferred, not claimed</h3>
+            <p>Epic Agent Factory is a no-code builder inside Epic EHR, previewed around HIMSS 2026, wider later. Personas people mention: Art, Emmie, Penny. Chronicles remains source of truth. I have not deployed an agent inside Chronicles. I have deployed agents with boundaries, customer workflows with unofficial definitions, and go-lives in regulated rooms (Navy Federal, Smith &amp; Nephew FDA-validated platform, Prime Medicare). I will take Agent Factory the way I took Grid/HA: embed, measure, write the standard, leave a team that can shape the next one.</p>
+          </div>
         </div>
       </section>
 
       <section class="scene" id="poc">
+        <p class="lede">A proof of concept is supposed to be a demo in a lab virtual machine. Customers often will not buy from a lab. They buy what they just watched run on their own servers. Drag the slider. The gold bars fill as the two weeks run. Both of these closed immediately after — that is how a statement of work gets signed, not a slide deck.</p>
         <div class="week">
           <span class="k">Day <span id="day">1</span></span>
           <input id="scrub" type="range" min="1" max="14" value="1" />
-          <span id="beat" style="color:#d8d0c2;font-size:14px;">On their floor.</span>
+          <span id="beat" style="color:#d8d0c2;font-size:14px;">I show up on their floor. Not a Zoom into a vendor VM.</span>
         </div>
         <div class="row">
           <div class="tile">
-            <h3>Volkswagen · Grid/HA in two weeks</h3>
-            <p>Bonded dual NIC. Oracle RAC on InfiniBand. Three 8-core PowerCenter servers. Live demo a day early. Four consultants shadowed. No dollar on this copy.</p>
+            <h3>Volkswagen Group of America — complete Grid/HA in two weeks</h3>
+            <p>They did not want a subset. They wanted the complete high-availability stack: bonded network with dual NICs, Oracle RAC sitting on InfiniBand, and three 8-core PowerCenter servers. The window was two weeks. I walked a live demo and finished a day early. Four of their consultants shadowed the entire install, taking notes, so they could run the next one. On the other side of the building a parallel Data Quality implementation was burning down. That was the pressure in the room — it was not my DQ miss. I do not put a dollar figure on this copy because we never logged one in the kit. The close was: they watched it run on their RAC.</p>
             <div class="bar"><i id="vw"></i></div>
           </div>
           <div class="tile">
-            <h3>Unnamed · PC + DQ on their metal</h3>
-            <p>Sales never installs locally unless quota. They would not buy from a VM. Smoke + use cases. Flying colors. Deal closed immediately. A rep cleared the quarter.</p>
+            <h3>Unnamed customer — PowerCenter and Data Quality on their machines</h3>
+            <p>Informatica sales does not install PowerCenter and Data Quality locally on a customer’s systems. The official path is the VM lab. This customer would not buy from a VM. They wanted it on their metal. I installed it anyway, because a sales representative needed to clear quarterly quota and a two-week POC was the only thing that would get a yes. Full smoke testing. Use-case analysis against their data. It passed with flying colors. The deal closed immediately after. That POC pushed someone over their target for the quarter. The client stays unnamed here. The motion is the point: policy said no, the customer wanted yes, I found the path.</p>
             <div class="bar"><i id="pc"></i></div>
           </div>
         </div>
         <div class="tile" style="margin-top:12px;">
-          <h3>SOW superstar</h3>
-          <p>With regional managers I wrote statements of work: full contract wording, resource levels (analyst through principal), estimates and assumptions. Micron 2,080→7,000 hours. Navy Federal 3,000 hours. Harvard through hypercare. The two-week POC is how that SOW gets signed.</p>
+          <h3>The SOW is the product after the POC</h3>
+          <p>About fifteen percent of my Informatica time was writing statements of work with regional managers — not a one-line hour chip. Full contract wording. Resource levels from analyst through principal. Estimates and assumptions. Range was mom-and-pop duration all the way to Micron: a resourcing plan that grew from 2,080 hours to 7,000 across PowerExchange, PowerCenter, Fast Clone, and Big Data, delivered on time with extensions. Navy Federal: 3,000-hour V1 with Informatica RMO plus their HR. Harvard Version 9: resource plan through post-production hypercare, not just go-live. The rule I held: understand the estimates, then lead the team to deliver inside them. A two-week POC that actually runs is how that SOW gets a signature.</p>
         </div>
       </section>
 
       <section class="scene" id="ag">
-        <p class="lede" style="margin-bottom:10px;">Four isolated Python processes on local Ollama (RTX 4070 / WSL2). A crash in one does not take the others down. This is a walkthrough of the architecture — not a live model call.</p>
-        <button class="go" id="fire">Run the contract</button>
+        <p class="lede">You asked for experience leveraging AI agents in day-to-day work. This is not a chatbot screenshot. On my lab machine I run four agents as four separate Python processes, each with its own virtual environment and tool loop, orchestrated against local Ollama on an RTX 4070 under WSL2. If one agent crashes or writes a bad script, the other three keep running. They do not chat in free text. They hand off structured JSON contracts. Press the button. You will see each role light in order. This walkthrough does not call a live model — it shows the architecture I actually run.</p>
+        <button class="go" id="fire">Walk the four-agent contract</button>
         <div class="ags" id="ags">
-          <div class="ag"><b>01 Systems</b>Constraints. Interfaces. What must not break.</div>
-          <div class="ag"><b>02 Architect</b>Pydantic JSON the next agent can consume.</div>
-          <div class="ag"><b>03 Synthesis</b>Payload against local Ollama. Work on their metal.</div>
-          <div class="ag"><b>04 Validator</b>Write, execute, debug until the contract passes.</div>
+          <div class="ag"><b>01 Systems</b>Names the constraints and interfaces: what already exists, what must not break, what “done” means. Same job as the cover of an Environment Summary.</div>
+          <div class="ag"><b>02 Architect</b>Turns that into a Pydantic contract — a JSON schema the next agent can consume without guessing. No prose handshake.</div>
+          <div class="ag"><b>03 Synthesis</b>Generates the payload against local Ollama. The work happens on this machine, the same way a POC happens on the customer’s metal instead of a vendor VM.</div>
+          <div class="ag"><b>04 Validator</b>Checks schema and graph. If it fails, it writes, executes, and debugs Python through the local LLM until the contract passes. Same self-heal loop I use when I bench GPUs in Local Grid Suite.</div>
         </div>
-        <pre id="json">{ "status": "idle", "tuesday": null }</pre>
+        <pre id="json">{ "status": "idle", "note": "Press the button. Each agent hands a contract to the next." }</pre>
       </section>
 
       <section class="scene" id="clip">
+        <p class="lede">The title of a talk I gave at Informatica while I was still embedded at Dawn Foods in Jackson, Michigan: “Customer satisfaction is worthless. Customer loyalty is priceless.” Gitomer, Carnegie, Greene. It is still the operating line. Two complete stories live in the PDF. Here is what they mean for this job.</p>
         <div class="row">
-          <div class="tile"><h3>Satisfaction is worthless</h3><p>A demo they clap for. CSAT they forget. BofA lost a lifetime over two policy clicks.</p></div>
-          <div class="tile"><h3>Loyalty is priceless</h3><p>Dawn 8h→1h got used. John’s daughters. Trillium did not even take a proposal. Talk given on the customer’s floor.</p></div>
+          <div class="tile">
+            <h3>Satisfaction is the lowest acceptable service</h3>
+            <p>I had been a Bank of America customer since 1999. Lost card. Ben on the phone could not click a button. Kari cited policy and could not help. Two clicks would have kept a lifetime of deposits, a home loan, a car loan. They chose policy. I left, and I took the word of mouth with me. Your posting says the customer wants measurable value and a partner who finds a path. Policy that leaves them with “the model can’t” is Kari. Founding or growing FDE: never leave the night operator with Kari.</p>
+          </div>
+          <div class="tile">
+            <h3>Loyalty is a number they still quote</h3>
+            <p>At Dawn the warehouse load used to take eight hours. PowerExchange on AS/400 remote journals took it under one. They put it on informatica.com because it got used, not because we surveyed them. The BI lead, John, had four daughters. I knew that because I asked. Over lunch he told Trillium he did not even want a proposal — he would wait for Informatica data quality. That is not a close. That is a relationship that closed the next product by itself. Loyalty is Tuesday. CSAT is a survey they forget.</p>
+          </div>
         </div>
       </section>
 
@@ -200,7 +236,23 @@
     let i = 0;
     setInterval(() => { i = (i + 1) % 5; spine.forEach((el, n) => el.classList.toggle('go', n === i)); }, 1800);
 
-    const beats = ['','On their floor.','Bond the NICs.','RAC on InfiniBand.','Three 8-core PC nodes.','Install PC / DQ on metal.','Smoke the stack.','Use cases on their data.','Consultants shadowing.','Flying colors.','Live demo.','Day early at VW.','SOW: resource levels.','Deal closes. Quota clears.','They run Tuesday.'];
+    const beats = [
+      '',
+      'I show up on their floor. Not a Zoom into a vendor VM.',
+      'Network: bond the dual NICs so Grid/HA has a real fabric.',
+      'Database: Oracle RAC on InfiniBand — this is the HA they asked for, not a subset.',
+      'Three 8-core PowerCenter servers come up as the integration tier.',
+      'The other POC: install PowerCenter and Data Quality on their metal. Sales does not do this. Quota does.',
+      'Smoke the stack the way go-live will: services start, a workflow runs, a client logs in.',
+      'Use-case analysis against their data, not a canned lab sample.',
+      'Four customer consultants shadow the install and take notes so they can run the next one.',
+      'It passes. Flying colors. Not a survey — a stack that runs.',
+      'Live demo in the room. They are watching their own machines.',
+      'Volkswagen: demo a day early. Two-week window, finished on day 13.',
+      'Write the SOW: contract wording, resource levels, estimates, assumptions.',
+      'Deal closes immediately after. A sales rep clears the quarter because the POC existed.',
+      'Tuesday: their team can still run it. That is finished.'
+    ];
     const scrub = document.getElementById('scrub');
     scrub.oninput = () => {
       const d = +scrub.value;
@@ -211,10 +263,10 @@
     };
 
     const frames = [
-      '{ "agent": "systems", "must_not_break": ["prod"] }',
-      '{ "agent": "architect", "schema": "pydantic" }',
-      '{ "agent": "synthesis", "runtime": "ollama.local" }',
-      '{ "agent": "validator", "status": "pass", "tuesday": true }'
+      '{ "agent": "systems", "constraint": "customer_metal", "must_not_break": ["production", "boundary"] }',
+      '{ "agent": "architect", "contract": "Handoff.v1", "format": "pydantic_json", "prose": false }',
+      '{ "agent": "synthesis", "runtime": "ollama.local", "gpu": "RTX_4070", "host": "WSL2" }',
+      '{ "agent": "validator", "checks": ["schema", "graph"], "retries": 2, "status": "pass", "tuesday": true }'
     ];
     document.getElementById('fire').onclick = () => {
       const ags = [...document.querySelectorAll('#ags .ag')];
