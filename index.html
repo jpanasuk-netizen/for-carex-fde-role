@@ -99,6 +99,7 @@
         <button data-s="ag">Four agents</button>
         <button data-s="clip">The clip</button>
         <button data-s="pdf" id="pdfbtn">Download resume PDF</button>
+        <button data-s="pb" id="pbbtn">Open playbook</button>
       </div>
 
       <section class="scene on" id="floor">
@@ -204,7 +205,7 @@
         </div>
       </section>
 
-      <p class="fine">Sand Creek, WI · ready for Madison 3 days as posted · linkedin.com/in/jeremy-p-34203322<br><a href="JEREMY_PANASUK_CAREX_FDE_ROLE.pdf" download>Download resume + 12-page playbook PDF</a> · <a href="playbook.html#resume">Open resume in the playbook</a></p>
+      <p class="fine">Sand Creek, WI · ready for Madison 3 days as posted · linkedin.com/in/jeremy-p-34203322<br><a href="JEREMY_PANASUK_CAREX_FDE_ROLE.pdf" download>Download resume + 12-page playbook PDF</a> · <a href="playbook.html">Open the IPS playbook</a> · <a href="playbook.html#resume">Open resume in the playbook</a></p>
     </div>
 
     <aside class="photo">
@@ -231,6 +232,7 @@
     }
     btns.forEach(b => b.onclick = () => {
       if (b.id === 'pdfbtn') { location.href = 'JEREMY_PANASUK_CAREX_FDE_ROLE.pdf'; return; }
+      if (b.id === 'pbbtn') { location.href = 'playbook.html'; return; }
       show(b.dataset.s);
     });
 
