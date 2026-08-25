@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jeremy Panasuk · Forward Deployed Engineer · Carex · Resume + Playbook</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,15 +13,41 @@
     html, body { background: #fff; }
     .sheet { width: 8.5in; height: 11in; overflow: hidden; page-break-after: always; position: relative; background: #f6f1e8; color: #122033; font-family: "Plus Jakarta Sans", Arial, sans-serif; }
     @media screen {
-      html, body { background: #e8dfcc; min-height: 0; }
-      body { padding: 24px 12px 72px; }
+      html, body { width: 100%; min-height: 0; background: #122033; }
+      body { padding: 24px 16px 88px; }
       .sheet {
-        width: min(8.5in, 100%);
+        width: min(1040px, 100%);
+        max-width: 1040px;
         height: auto;
         min-height: 0;
         overflow: visible;
-        margin: 0 auto 24px;
+        margin: 0 auto 28px;
       }
+      .pad { padding: 28px 36px 32px; }
+      .foot {
+        position: relative;
+        left: auto; right: auto; bottom: auto;
+        margin-top: 16px;
+        padding: 8px 36px 20px;
+      }
+      .hero, .clip-hero { grid-template-columns: minmax(0, 1fr) 140px; }
+      .shot, .shot-clip { width: 140px; height: 175px; }
+      .reel { grid-template-columns: 5.5rem minmax(0, 1fr) 5.5rem minmax(0, 1fr); }
+      .span-row { grid-template-columns: 8rem minmax(0, 1fr); }
+      .hbar .row { grid-template-columns: 7rem minmax(0, 1fr) 3.5rem; }
+      .toc a { grid-template-columns: 3rem minmax(0, 1fr) auto; }
+      .nav { font-size: 12px; }
+      h1, .bill h1, .worth, .price, .poc-h { font-size: clamp(28px, 4.2vw, 48px); line-height: 1.05; }
+      h2 { font-size: 13px; }
+      h3 { font-size: 16px; }
+      p, ul, li, td, .who, .pts, .skills { font-size: 15px; line-height: 1.45; }
+      .trusted { white-space: normal; font-size: 12px; }
+      .tag { font-size: 17px; max-width: 68ch; }
+      .contact, .kicker, .attrib, .room { font-size: 12px; }
+      .clip-lede, .bill .sub { font-size: 18px; max-width: 68ch; }
+      .quote { font-size: 22px; }
+      .yesline { font-size: 18px; }
+      .duo .ex p, .ok p, .layer p, .card p, .cell p { font-size: 14px; line-height: 1.4; }
     }
     .navy { height: 6px; background: #122033; }
     .gold { height: 3px; background: #c4a35a; }
@@ -318,7 +345,7 @@
       <div class="ex">
         <div class="exk">POC · unnamed · PC + DQ on their metal</div>
         <h3>Sales never installs locally. Unless quota.</h3>
-        <p>They would not buy from a VM. I installed PowerCenter and Data Quality on their systems. Full smoke. Use-case analysis. Flying colors. Two weeks. Deal closed immediately. A rep cleared the quarter because the POC existed.</p>
+        <p>They would not buy from a VM. I installed PowerCenter and Data Quality on their systems. Full smoke. Use-case analysis. Flying colors. Two weeks. Closed $375k the night before quarter end. A rep cleared the quarter because the POC existed.</p>
       </div>
     </div>
     <div class="strike"><b>Carex FDE · Madison hybrid.</b> Customer satisfaction is worthless. Customer loyalty is priceless. If they cannot run it Tuesday, I did not finish.</div>
@@ -353,7 +380,7 @@
       <div class="n">−50%</div><div><b>West Bend Mutual</b> — live SOAP/XML quote path. Windows service enablement.</div>
       <div class="n">+200%</div><div><b>Mercedes-Benz</b> — longest workflows. TCS trained. Playbook stayed.</div>
       <div class="n">2 wks</div><div><b>Volkswagen</b> — full Grid/HA a day early. Bonded NIC, RAC on InfiniBand, three 8-core PC. Four consultants shadowed.</div>
-      <div class="n">2 wks</div><div><b>Unnamed · local PC/DQ</b> — sales never installs locally unless quota. Smoke + use cases. Closed immediately.</div>
+      <div class="n">2 wks</div><div><b>Unnamed · local PC/DQ</b> — sales never installs locally unless quota. Smoke + use cases. Closed $375k the night before quarter end.</div>
       <div class="n">20–30%</div><div><b>MBFS</b> — ALFA→ODS. Cache in RAM. Cheat sheet + walked loads.</div>
       <div class="n">7,000h</div><div><b>Micron</b> — fab EDW, PWX, Grid/HA, Fast Clone. Zero downtime.</div>
       <div class="n">$800k</div><div><b>Toyota</b> — Engine Management go-live. All consultants 5/5.</div>
@@ -651,7 +678,7 @@
       <h3>The SOW is the product after the POC</h3>
       <p>With Informatica regional managers I wrote the client <b>statements of work</b>: full contract wording, resource levels (analyst through principal), estimates and assumptions. Range was mom-and-pop duration through <b>Micron 2,080 → 7,000 hours</b> and <b>Navy Federal 3,000 hours</b> with Informatica RMO plus their HR. Harvard v9 resource plan through hypercare, not just go-live. Deliver inside the estimates. The two-week POCs on this page are how that SOW gets signed.</p>
     </div>
-    <p class="clip-lede" style="max-width:68ch;">Sales does not install PowerCenter and Data Quality on the customer’s metal. Unless the quarter is on the line. I ran the POC anyway. Full smoke. Use-case analysis. Flying colors. The deal closed immediately after. Same window at Volkswagen: complete Grid/HA, live demo a day early.</p>
+    <p class="clip-lede" style="max-width:68ch;">Sales does not install PowerCenter and Data Quality on the customer’s metal. Unless the quarter is on the line. I ran the POC anyway. Full smoke. Use-case analysis. Flying colors. Closed $375k the night before quarter end. Same window at Volkswagen: complete Grid/HA, live demo a day early.</p>
     <div class="spine">
       <div><b>01</b>They ask for metal</div>
       <div><b>02</b>Two-week window</div>
@@ -683,12 +710,12 @@
       <div class="ex">
         <div class="exk">POC 2 · unnamed · PC + DQ on their systems</div>
         <h3>Sales never does this. Unless quota.</h3>
-        <p>The customer wanted PowerCenter and Data Quality installed locally on their systems. Informatica sales does not do that. The official path is the VM lab. They would not buy from a VM. So I installed it on their metal anyway — because a sales rep needed to clear the quarter, and a two-week POC was the only thing that would.</p>
+        <p>The customer wanted PowerCenter and Data Quality installed locally on their systems. Informatica sales does not do that. The official path is the VM lab. They would not buy from a VM. So I installed it on their metal anyway — because a sales rep needed to clear the quarter, and a two-week POC was the only thing that would. Closed $375k the night before quarter end.</p>
         <div class="hbar">
           <div class="row"><div class="lab">Sales path</div><div class="trk"><div class="fl" style="width:18%"></div></div><div class="val">VM lab</div></div>
           <div class="row"><div class="lab">What closed</div><div class="trk"><div class="fl gold" style="width:100%"></div></div><div class="val">Their metal</div></div>
         </div>
-        <p>Full smoke testing. Use-case analysis against their data. It passed with flying colors. Two weeks. The deal closed immediately after. That POC pushed someone over their target sales goals for the quarter. Client unnamed on this copy — the motion is the point.</p>
+        <p>Full smoke testing. Use-case analysis against their data. It passed with flying colors. Two weeks. Closed $375k the night before quarter end. That POC pushed someone over their target sales goals for the quarter. Client unnamed on this copy — the motion is the point.</p>
         <div class="goldbox"><div class="t">POC → revenue</div>
         <p>Policy said no. Quota said yes. I found the path. Same operating line as Kari at BofA, inverted: the customer wanted yes, so I helped them to yes. FDE never leaves them with “we don’t install that locally.”</p></div>
       </div>
